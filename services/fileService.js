@@ -13,7 +13,7 @@ class FileService {
 					return reject({message: "File is already exist"})
 				}
 			} catch (e) {
-				return reject({message: 'File error'})
+				return reject(e?.message)
 			}
 		}))
 	}
@@ -29,7 +29,7 @@ class FileService {
 	}
 
 	getPath(req, file) {
-		return req.filePath + '\\' + file.user + '\\' + file.path
+		return req.filePath + '/' + file.user + '/' + file.path
 	}
 }
 
