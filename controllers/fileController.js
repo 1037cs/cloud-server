@@ -9,7 +9,7 @@ class FileController {
 	async createDir(req, res) {
 		try {
 			const {name, type, parent} = req.body
-			const file = new File({name, type:'dir', parent, user: req.user.id})
+			const file = new File({name, type, parent, user: req.user.id})
 			const parentFile = await File.findOne({_id: parent})
 			if (!parentFile) {
 				file.path = name
@@ -23,7 +23,7 @@ class FileController {
 			await file.save()
 			return res.json(file)
 		} catch (e) {
-			console.log(e)
+			console.log('TLF')
 			return res.status(400).json(e)
 		}
 	}
