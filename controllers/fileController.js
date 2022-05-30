@@ -68,9 +68,9 @@ class FileController {
 
 			let path;
 			if (parent) {
-				path = `${req.filePath}/${user._id}/${parent.path}/${file.name}`
+				path = `${req.filePath}\\${user._id}\\${parent.path}\\${file.name}`
 			} else {
-				path = `${req.filePath}/${user._id}/${file.name}`
+				path = `${req.filePath}\\${user._id}\\${file.name}`
 			}
 
 			if (fs.existsSync(path)) {
@@ -82,7 +82,7 @@ class FileController {
 			let filePath = file.name
 			console.log(parent)
 			if (parent) {
-				filePath = parent.path + '/' + file.name
+				filePath = parent.path + '\\' + file.name
 			}
 			console.log(filePath)
 			const dbFile = new File({
@@ -149,13 +149,13 @@ class FileController {
 		try {
 			const user = await User.findById(req.user.id)
 			if (user.avatar) {
-				fs.unlinkSync(config.get('staticPath') + '/' + user.avatar)
+				fs.unlinkSync(config.get('staticPath') + '\\' + user.avatar)
 				user.avatar = null
 				await user.save()
 			}
 			const avatar = req.files.file
 			const avatarName = Uuid.v4() + '.jpg'
-			avatar.mv(config.get('staticPath') + '/' + avatarName)
+			avatar.mv(config.get('staticPath') + '\\' + avatarName)
 			user.avatar = avatarName
 			await user.save()
 			return res.json(user)
@@ -169,7 +169,7 @@ class FileController {
 		try {
 			const user = await User.findById(req.user.id)
 			if (user.avatar) {
-				fs.unlinkSync(config.get('staticPath') + '/' + user.avatar)
+				fs.unlinkSync(config.get('staticPath') + '\\' + user.avatar)
 				user.avatar = null
 				await user.save()
 			}
