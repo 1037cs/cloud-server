@@ -150,13 +150,13 @@ class FileController {
 		try {
 			const user = await User.findById(req.user.id)
 			if (user.avatar) {
-				fs.unlinkSync(req.fileStaticPath + '\\' + user.avatar)
+				fs.unlinkSync(req.fileStaticPath + '/' + user.avatar)
 				user.avatar = null
 				await user.save()
 			}
 			const avatar = req.files.file
 			const avatarName = Uuid.v4() + '.jpg'
-			avatar.mv(req.fileStaticPath + '\\' + avatarName)
+			avatar.mv(req.fileStaticPath + '/' + avatarName)
 			user.avatar = avatarName
 			await user.save()
 			return res.json(user)
@@ -170,7 +170,7 @@ class FileController {
 		try {
 			const user = await User.findById(req.user.id)
 			if (user.avatar) {
-				fs.unlinkSync(req.fileStaticPath + '\\' + user.avatar)
+				fs.unlinkSync(req.fileStaticPath + '/' + user.avatar)
 				user.avatar = null
 				await user.save()
 			}
