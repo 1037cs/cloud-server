@@ -13,7 +13,7 @@ const path = require('path')
 
 app.use(fileUpload({}))
 app.use(cors)
-app.use(filePathMiddleware(path.resolve(__dirname,'files')))
+app.use(filePathMiddleware(path.resolve(__dirname,'files'),path.resolve(__dirname,'static')))
 app.use(express.static('static'))
 app.use(express.json())
 app.use('/api/auth',authRouter)
